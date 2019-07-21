@@ -1,0 +1,12 @@
+{
+  "name":"My App",
+  "uid":"com.expw.myapp",
+  "version":"1.0",
+  "company":"http:\/\/mycompany.com",
+  "main":"index.html",
+  "window":{
+    "title":"My App",
+    "width":600.0,
+    "height":600.0
+  }
+}

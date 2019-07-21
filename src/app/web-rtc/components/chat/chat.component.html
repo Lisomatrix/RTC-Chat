@@ -1,0 +1,85 @@
+<mat-drawer-container class="chat-page-container">
+  <mat-drawer class="sidebar-container" mode="side" opened>
+    <div class="rooms-container">
+      <!-- <div (click)="joinRoom(room.id)" matRipple *ngFor="let room of RoomsSubject | async" class="room-container">
+
+        <div class="room-avatar-container">
+          <span>{{ room.name[0] }}</span>
+        </div>
+        <div class="room-name-container">
+          <span>{{ room.name }}</span>
+        </div>
+
+      </div> -->
+      <div (click)="joinRoom(user.id)" matRipple *ngFor="let user of users" class="room-container">
+
+        <div class="room-avatar-container">
+          <span>{{ user.name[0] }}</span>
+        </div>
+        <div class="room-name-container">
+          <span>{{ user.name }}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="add-room-container">
+      <button color="primary" mat-flat-button (click)='createRoom()' class="add-room-btn">
+        Add Room
+      </button>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="page-content-container">
+      <div class="video-audio-call-container">
+        <div (click)="startVideoCall()" matRipple class="icon-container video-call-icon-container">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">videocam</mat-icon>
+        </div>
+        <div (click)="startAudioCall()" matRipple class="icon-container audio-call-icon-container">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">call</mat-icon>
+        </div>
+      </div>
+      <div class="message-list-container">
+        <div *ngFor="let msg of messages" class="message-full-width">
+          <div class="{{ msg.sentByMe ? 'message-container sent-by-me' : 'message-container' }}">
+            <span class="message">{{ msg.message }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-send-container">
+        <input #message (keydown.enter)="sendMessage(message)" class="msg-input" type="text">
+        <button (click)="sendMessage(message)" class="send-btn" color="primary" mat-flat-button>Send</button>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>
+<audio #audioOption>
+    <source src='./../../../../assets/get-outta-here.mp3' type="audio/mp3">
+</audio>
+<div #videosContainer (dblclick)='toggleFullscreen()' class="videos-container" [cdkDragFreeDragPosition]="dragPosition" cdkDrag>
+  <div class="full-screen-btn-container">
+    <button (click)='toggleFullscreen()' class="full-screen-btn" mat-icon-button>
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+  </div>
+  <div class="call-options-container">
+    <div class="video-btn-container">
+      <button (click)="toggleVideo()" class="video-btn" mat-icon-button>
+        <mat-icon>videocam</mat-icon>
+      </button>
+    </div>
+    <div class="audio-btn-container">
+      <button class="full-screen-btn" mat-icon-button>
+        <mat-icon>volume_up</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="remote-video-container">
+    <video autoplay #remoteVideo></video>
+  </div>
+  <div class="local-video-container">
+    <video autoplay #localVideo></video>
+  </div>
+</div>
