@@ -1,0 +1,81 @@
+<mat-drawer-container class="chat-page-container">
+  <mat-drawer class="sidebar-container" mode="side" opened>
+      <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="page-content-container">
+      <div class="video-audio-call-container">
+        <div class="username-container">
+          <span class="username">{{ currentConversation.user ? currentConversation.user.name : '' }}</span>
+        </div>
+        <div (click)="startVideoCall()" matRipple class="icon-container video-call-icon-container">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">videocam</mat-icon>
+        </div>
+        <div (click)="startAudioCall()" matRipple class="icon-container audio-call-icon-container">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">call</mat-icon>
+        </div>
+      </div>
+      <!-- box-shadow: 0 0px 6px rgba(0, 0, 0, 0.26); -->
+
+      <!-- <cdk-virtual-scroll-viewport #scroll class="message-list-container" itemSize="currentConversation.messages.length">
+        <ng-container class="message-full-width" *cdkVirtualFor="let msg of currentConversation.messages">
+          <div class="message-full-width">
+            <div class="{{ msg.authorId === userId ? 'message-container sent-by-me' : 'message-container' }}">
+              <span class="message">{{ msg.message }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </cdk-virtual-scroll-viewport> -->
+      
+      <div #scroll class="message-list-container">
+        <div *ngFor="let msg of currentConversation.messages" class="message-full-width">
+          <div class="{{ msg.authorId === userId ? 'message-container sent-by-me' : 'message-container' }}">
+            <span class="message">{{ msg.message }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-send-container">
+        <input #message placeholder="Message..." (keydown.enter)="sendMessage(message)" class="msg-input" type="text">
+        <!-- <button (click)="sendMessage(message)" class="send-btn" color="primary" mat-flat-button>Send</button> -->
+        <button matTooltip="Send message" (click)="sendMessage(message)" class="send-btn" mat-icon-button>
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>
+<audio #audioOption>
+  <source src='./../../../../assets/get-outta-here.mp3' type="audio/mp3">
+</audio>
+<audio #callAudio>
+  <source src="./../../../../assets/xylo_alarm.mp3" type="audio/mp3">
+</audio>
+<div #videosContainer (dblclick)='toggleFullscreen()' class="videos-container" [cdkDragFreeDragPosition]="dragPosition"
+  cdkDrag>
+  <div class="full-screen-btn-container">
+    <button (click)='toggleFullscreen()' class="full-screen-btn" mat-icon-button>
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+  </div>
+  <div class="call-options-container">
+    <div class="video-btn-container">
+      <button (click)="toggleMedia('video')" class="video-btn" mat-icon-button>
+        <mat-icon>videocam</mat-icon>
+      </button>
+    </div>
+    <div class="audio-btn-container">
+      <button (click)="toggleMedia('audio')" class="full-screen-btn" mat-icon-button>
+        <mat-icon>volume_up</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="remote-video-container">
+    <video autoplay #remoteVideo></video>
+  </div>
+  <div class="local-video-container">
+    <video autoplay #localVideo></video>
+  </div>
+</div>

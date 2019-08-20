@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { SignalingService } from './signaling.service';
-import { User } from './user.service';
+import { User } from 'src/app/api/users/users.service';
 
 export interface Room {
   id: string;
@@ -18,15 +17,15 @@ export class RoomService {
 
   private currentRoom: Room;
 
-  constructor(private signaling: SignalingService) {
-    this.signaling.connect();
-    this.signaling.emit({ event: 'rooms', data: { } });
-    this.signaling.onEvent('new_room').subscribe((data: Room) => this.addRoom(data));
-    this.signaling.onEvent('room_created').subscribe(() => {});
+  constructor() {
+    // this.signaling.connect();
+    // this.signaling.emit({ event: 'rooms', data: { } });
+    // this.signaling.onEvent('new_room').subscribe((data: Room) => this.addRoom(data));
+    // this.signaling.onEvent('room_created').subscribe(() => {});
   }
 
   public joinRoom(id: string) {
-    this.signaling.emit({ event: 'join_room', data: { id } });
+    // this.signaling.emit({ event: 'join_room', data: { id } });
 
     const currentRooms = this.rooms.getValue();
 
@@ -40,7 +39,7 @@ export class RoomService {
   }
 
   public createRoom(name: string): void {
-    this.signaling.emit({ event: 'new_room', data: { name } });
+    // this.signaling.emit({ event: 'new_room', data: { name } });
   }
 
   public getCurrentRoom() {

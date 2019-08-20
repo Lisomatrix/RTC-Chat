@@ -1,5 +1,19 @@
 import { Injectable } from '@angular/core';
-import { hash, SecretBoxLength, box_keyPair, sign_keyPair, box, BoxKeyPair, randomBytes, decodeUTF8, box_open, encodeUTF8, SignKeyPair, sign_open, sign, secretbox, decodeBase64, secretbox_open, encodeBase64 } from 'tweetnacl-ts';
+import {
+  SecretBoxLength,
+  box_keyPair,
+  sign_keyPair,
+  box, BoxKeyPair,
+  randomBytes,
+  decodeUTF8,
+  box_open,
+  encodeUTF8,
+  SignKeyPair,
+  secretbox,
+  decodeBase64,
+  secretbox_open,
+  encodeBase64
+} from 'tweetnacl-ts';
 import { isString } from 'util';
 
 interface EncryptedMessage {

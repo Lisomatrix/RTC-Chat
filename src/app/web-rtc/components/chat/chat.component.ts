@@ -4,6 +4,7 @@ import { Room, RoomService } from '../../services/room.service';
 import { RTCService } from '../../services/rtc.service';
 import { EncryptionService } from '../../services/encryption.service';
 import { User, UserService } from '../../services/user.service';
+import { SignalRService } from '../../services/signal-r.service';
 
 interface Message {
   sentByMe: boolean;
@@ -40,11 +41,12 @@ export class ChatComponent implements OnInit {
 
   private dragPosition = {x: 0, y: 0};
 
-  constructor(private cdr: ChangeDetectorRef, private rooms: RoomService, private rtcService: RTCService, private userService: UserService) {
+  constructor(private signalRService: SignalRService, private cdr: ChangeDetectorRef, private rooms: RoomService, private rtcService: RTCService, private userService: UserService) {
     this.rooms.getRooms().subscribe(x => this.RoomsSubject.next(x));
     this.userService.getUsers().subscribe(x => this.users = x);
 
     this.rtcService.getConnectedObservable().subscribe(connected => this.showStreaming(connected));
+    this.signalRService.connect();
   }
 
   ngOnInit() {
@@ -52,6 +54,11 @@ export class ChatComponent implements OnInit {
       this.messages.push({ sentByMe: false, message: peerMessage.message });
       this.audioPlayerRef.nativeElement.play();
     });
+
+    this.signalRService.getUsers().subscribe(users =>  {
+      console.log(users);
+      this.users = users;
+    })
   }
 
   private sendMessage(messageInput: HTMLInputElement) {

@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { SignalingService } from "./signaling.service";
 import { Subject } from "rxjs";
 import { RoomService } from "./room.service";
 import { EncryptionService } from "./encryption.service";
@@ -47,32 +46,31 @@ export class RTCService {
   constructor(
     private encryptionService: EncryptionService,
     private rooms: RoomService,
-    private signaling: SignalingService
   ) {
-    this.signaling.connect();
+    // this.signaling.connect();
 
-    this.signaling.onEvent("new_room").subscribe(data => {});
+    // this.signaling.onEvent("new_room").subscribe(data => {});
 
     this.rooms.getRooms().subscribe(rooms => {});
 
-    this.signaling.onEvent("user_joined").subscribe(() => this.sendOffer());
-    this.signaling.onEvent("receive_offer").subscribe(offer => {
-      const receivedOffer = new RTCSessionDescription(JSON.parse(offer));
+    // this.signaling.onEvent("user_joined").subscribe(() => this.sendOffer());
+    // this.signaling.onEvent("receive_offer").subscribe(offer => {
+    //   const receivedOffer = new RTCSessionDescription(JSON.parse(offer));
 
-      this.setOffer(receivedOffer);
-    });
+    //   this.setOffer(receivedOffer);
+    // });
 
-    this.signaling.onEvent("receive_answer").subscribe(answer => {
-      const receivedAnswer = new RTCSessionDescription(JSON.parse(answer));
+    // this.signaling.onEvent("receive_answer").subscribe(answer => {
+    //   const receivedAnswer = new RTCSessionDescription(JSON.parse(answer));
 
-      this.setAnswer(receivedAnswer);
-    });
+    //   this.setAnswer(receivedAnswer);
+    // });
 
-    this.signaling
-      .onEvent("receive_ice")
-      .subscribe(ice =>
-        this.inboundIceSubject.next(new RTCIceCandidate(JSON.parse(ice)))
-      );
+    // this.signaling
+    //   .onEvent("receive_ice")
+    //   .subscribe(ice =>
+    //     this.inboundIceSubject.next(new RTCIceCandidate(JSON.parse(ice)))
+    //   );
   }
 
   public sendPeerMessage(message: PeerMessage) {
@@ -98,7 +96,7 @@ export class RTCService {
       message: binary
     };
 
-    this.signaling.emit({ event: 'new_message', data })
+    // this.signaling.emit({ event: 'new_message', data })
   }
 
   public getConnectedObservable() {
@@ -127,13 +125,13 @@ export class RTCService {
 
     this.peerConnection.setLocalDescription(answer);
 
-    this.signaling.emit({ event: "send_answer", data: answer });
+    // this.signaling.emit({ event: "send_answer", data: answer });
 
     this.findIceCandidate();
 
-    this.iceSubject.subscribe(ice =>
-      this.signaling.emit({ event: "send_ice", data: ice })
-    );
+    // this.iceSubject.subscribe(ice =>
+    //   this.signaling.emit({ event: "send_ice", data: ice })
+    // );
 
     return answer;
   }
@@ -154,23 +152,24 @@ export class RTCService {
     const offer = await this.peerConnection.createOffer(this.offerOptions);
     this.peerConnection.setLocalDescription(offer);
 
-    this.signaling.emit({ event: "send_offer", data: offer });
+    // this.signaling.emit({ event: "send_offer", data: offer });
 
     this.findIceCandidate();
 
-    this.iceSubject.subscribe(ice =>
-      this.signaling.emit({ event: "send_ice", data: ice })
-    );
+    // this.iceSubject.subscribe(ice =>
+    //   this.signaling.emit({ event: "send_ice", data: ice })
+    // );
 
     return offer;
   }
 
   public async getLocalStream(): Promise<MediaStream> {
-    if (!this.localStream)
+    if (!this.localStream) {
       this.localStream = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: false
       });
+    }
 
     const devices = await navigator.mediaDevices.enumerateDevices();
 

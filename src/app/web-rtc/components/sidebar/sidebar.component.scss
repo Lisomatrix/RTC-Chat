@@ -1,0 +1,121 @@
+.search-and-settings-container {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    padding: 4px;
+
+    .search-container {
+        width: 100%;
+        height: 100%;
+        padding: 4px;
+        margin-top: 10px;
+
+        .search-input-container {
+            background-color: #323943;
+            border-radius: 20px;
+            display: flex;
+            height: 30px;
+            padding: 3px;
+            padding-right: 8px;
+            color: #717882;
+            border: 1px solid transparent;
+            transition: 0.3s;
+
+            &:focus-within {
+                border-color: #717882;
+            }
+
+            .search-input {
+                width: 90%;
+                height: 100%;
+                text-indent: 8px;
+                background-color: transparent;
+                border: none;
+                font-family: Roboto, "Helvetica Neue", sans-serif;
+                color: #717882;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .icon {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .settings-and-add-container {
+        text-align: center;
+        margin-top: 8px;
+        color: #717882;
+
+        .settings-container,
+        .add-user-container {
+            display: inline-block;
+            background-color: #323943;
+            height: 40px;
+            border-radius: 26px;
+        }
+
+        .add-user-container {
+            margin-left: 10px;
+        }
+    }
+}
+
+.rooms-container {
+    width: 100%;
+    height: calc(100% - 100px);
+    overflow: auto;
+
+    .room-container {
+        width: 100%;
+        height: 60px;
+        padding: 8px;
+        display: flex;
+        cursor: pointer;
+        margin-top: 10px;
+        padding-top: 12px;
+        transition: all 0.3s ease 0s;
+
+        .room-avatar-container {
+            text-align: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 15em;
+            background-color: #3f51b5;
+            display: block;
+            padding-top: 8px;
+
+            span {
+                color: #fff;
+
+            }
+        }
+
+        .name-and-status-container {
+            display: flex;
+            flex-flow: column;
+            width: calc(100% - 35px);
+            max-width: calc(100% - 35px);
+
+            .room-name-container {
+                padding-left: 10px;
+                color: #dbe2e8;
+                font-weight: 500;
+                font-family: Roboto, "Helvetica Neue", sans-serif;
+            }
+
+            .status-container {
+                text-indent: 10px;
+                color: #7a818b;
+                margin-top: 4px;
+                font-size: 14px;
+                font-weight: 300;
+                overflow: hidden;
+            }
+        }
+    }
+}

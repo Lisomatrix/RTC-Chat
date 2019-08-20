@@ -30,3 +30,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: #888;
     -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
 }
+
+.cdk-virtual-scroll-content-wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 0 18px 0 18px;
+    overflow: auto;
+    display: flex;
+    flex-flow: column;
+  }

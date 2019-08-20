@@ -1,0 +1,28 @@
+<div class="settings-container">
+    <div class="settings-title-container">
+        <h3 class="title">Settings</h3>
+    </div>
+    <div class="settings-options-container">
+        <div class="input-setting-container username-setting-container">
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input #usernameInput value="{{name}}" matInput placeholder="Username">
+                <mat-error *ngIf="isNameInUse">
+                    Name already in use
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="input-setting-container sound-setting-container">
+            <mat-checkbox #soundCheck [checked]="soundActive" >Sound activated</mat-checkbox>
+        </div>
+        <div class="input-setting-container notification-setting-container">
+            <mat-checkbox #notificationCheck [checked]="notificationActive" >Notifications activated</mat-checkbox>
+        </div>
+    </div>
+    <div class="bts-container">
+        <mat-spinner [diameter]='35' [style.visibility]="loading"></mat-spinner>
+        <div></div>
+        <button (click)="onCancelClick()" mat-button>Cancel</button>
+        <button (click)="onSaveClick(notificationCheck.checked, soundCheck.checked, usernameInput.value)" mat-button color="primary">Save</button>
+    </div>
+</div>

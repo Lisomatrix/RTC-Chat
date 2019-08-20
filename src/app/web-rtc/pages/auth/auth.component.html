@@ -1,0 +1,18 @@
+<div class="auth-page-container">
+  <div class="auth-container">
+    <div class="inputs-container">
+      <mat-form-field class="input-container" appearance="fill">
+        <mat-label>Enter your username</mat-label>
+        <input #name matInput>
+      </mat-form-field>
+      <mat-form-field class="input-container" appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input #password type="password" matInput>
+      </mat-form-field>
+      <div class="btn-container">
+        <button color="primary" mat-flat-button (click)='createUser(name.value, password.value)'>Create User</button>
+        <button class="log-in" color="primary" mat-flat-button (click)='logIn(name.value, password.value)'>Log in</button>
+      </div>
+    </div>
+  </div>
+</div>

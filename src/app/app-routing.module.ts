@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './web-rtc/components/auth/auth.component';
-import { ChatComponent } from './web-rtc/components/chat/chat.component';
+import { AuthComponent } from './web-rtc/pages/auth/auth.component';
+import { ChatComponent } from './web-rtc/pages/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent
-  }
+  },
 ];
 
 @NgModule({

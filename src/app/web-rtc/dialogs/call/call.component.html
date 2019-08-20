@@ -1,0 +1,29 @@
+<div class="call-container">
+    <div class="call-user-container">
+        <div class="user-container">
+            <div class="user-icon-container">
+                <span class="user-icon">I</span>
+            </div>
+            <div class="user-name-container">
+                <span class="user-name">Lisomatrix</span>
+            </div>
+        </div>
+    </div>
+    <div class="call-user-btn-container">
+        <div class="accept-btn-container">
+            <button (click)="respondCall('video')" matTooltip="Accept video call" mat-raised-button color="primary">
+                <mat-icon>videocam</mat-icon>
+            </button>
+        </div>
+        <div class="accept-btn-container">
+            <button (click)="respondCall('audio')" matTooltip="Accept audio call" mat-raised-button color="primary">
+                <mat-icon>call</mat-icon>
+            </button>
+        </div>
+        <div class="refuse-btn-container">
+            <button (click)="respondCall('refuse')" matTooltip="Refuse call" mat-raised-button color="warn">
+                <mat-icon>call_end</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

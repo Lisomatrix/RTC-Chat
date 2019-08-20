@@ -1,0 +1,45 @@
+<!-- <mat-drawer class="sidebar-container" mode="side" opened> -->
+    <div class="search-and-settings-container">
+        <div class="search-container">
+            <div class="search-input-container">
+                <input #searchInput (input)="filterConversations(searchInput.value)" placeholder="Search..."
+                    class="search-input">
+                <mat-icon class="icon">search</mat-icon>
+            </div>
+        </div>
+        <div class="settings-and-add-container">
+            <div (click)="openSettingsDialog()" matTooltip="Settings" class="settings-container">
+                <button class="icon" mat-icon-button>
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </div>
+            <div (click)="openDialog()" matTooltip="Add user" class="add-user-container">
+                <button class="icon" mat-icon-button>
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="rooms-container">
+        <div *ngFor="let user of filteredConversations">
+        <div *ngIf="user.user" (click)="selectUser(user.user.id)" matRipple
+            [style.background]="selectedUserId === user.user.id ? '#424953' : 'transparent'"
+            [style.border-left]="selectedUserId === user.user.id ? '4px solid #54d289' : '4px solid transparent'"
+            class="room-container">
+
+            <div class="room-avatar-container">
+                <span>{{ user.user.name ? user.user.name[0] : 'U' }}</span>
+            </div>
+            <div class="name-and-status-container">
+                <div class="room-name-container">
+                    <span>{{ user.user.name }}</span>
+                </div>
+                <div class="status-container">
+                    <span
+                        class="status">{{ user.messages.length > 0 ? userId === user.messages[user.messages.length - 1].authorId ? 'You: ' + user.messages[user.messages.length - 1].message : user.messages[user.messages.length - 1].message : '' }}</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+<!-- </mat-drawer> -->

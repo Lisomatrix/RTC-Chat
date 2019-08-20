@@ -3,6 +3,7 @@ import { UserService } from "../../services/user.service";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../services/authentication.service";
 import { Observable } from "rxjs";
+import { SignalRService } from '../../services/signal-r.service';
 
 @Component({
   selector: "rtc-auth",
@@ -15,8 +16,11 @@ export class AuthComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private user: UserService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private signalRService: SignalRService,
+  ) {
+    this.signalRService.connect();
+  }
 
   ngOnInit() {}
 
